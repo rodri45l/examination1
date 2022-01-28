@@ -15,18 +15,22 @@ public class Main {
         int option = main.ShowMenu();
 
         if(option == 1) {
-            int x;
             Integer result = intList.stream()
                     .mapToInt(Integer::intValue)
                     .sum();
             System.out.println(result);
         }
         else if(option == 2) {
-            System.out.println(option);
+            int x;
+            x = intList.stream().reduce(1, (a, b) -> a * b);
+            System.out.println(x);
+
 
         }
         else if(option == 3) {
-            System.out.println(option);
+            int x;
+            x = intList.stream().reduce(1, (a, b) -> a - b);
+            System.out.println(x);
 
         }
         System.out.println("finished");
@@ -50,8 +54,7 @@ public class Main {
     public String EnterArguments(){
         System.out.println("Please enter the numbers you need for the operation separated by a comma");
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        return input;
+        return scanner.nextLine();
 
     }
     public ArrayList<Integer> arrayListToInt(ArrayList<String> rawNumbers){
