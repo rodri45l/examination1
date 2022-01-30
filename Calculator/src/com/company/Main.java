@@ -14,14 +14,18 @@ interface CalculateInterface {
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to the calculator!");
-        Main main = new Main();
-        String numbers = main.EnterArguments();
-        List<Integer> intList = Arrays.stream(numbers.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        System.out.println("           _            _       _             \n" +
+                "          | |          | |     | |            \n" +
+                "  ___ __ _| | ___ _   _| | __ _| |_ ___  _ __ \n" +
+                " / __/ _` | |/ __| | | | |/ _` | __/ _ \\| '__|\n" +
+                "| (_| (_| | | (__| |_| | | (_| | || (_) | |   \n" +
+                " \\___\\__,_|_|\\___|\\__,_|_|\\__,_|\\__\\___/|_|   ");
 
-        main.runCalculator(intList);
+        System.out.println("\n\nWelcome to our calculator!");
+        Main main = new Main();
+            main.EnterArguments();
+
+
 
     }
 
@@ -37,16 +41,28 @@ public class Main {
         int i;
         i = scanner.nextInt();
         if (i < 1 | i > 5) {
-            i = main.ShowMenu();
+            System.out.println("Option Out of bounds!!");
+            System.out.println("Try Again!");
+            i = main.ShowMenu(); // We use recursion to show again the menu if an invalid option is chosen.
         }
         return i;
 
     }
 
-    public String EnterArguments() {
-        System.out.println("Please enter the numbers you need for the operation separated by a comma");
+    public void EnterArguments() {
+        try{
+            Main main = new Main();
+        System.out.print("Please enter the numbers you need for the operation separated by a comma: ");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        String numbers = scanner.nextLine();
+        List<Integer> intList = Arrays.stream(numbers.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        main.runCalculator(intList);}
+        catch(NumberFormatException e){
+            System.out.println("Only numbers and commas allowed");
+            EnterArguments();
+        }
 
     }
 
@@ -89,14 +105,18 @@ public class Main {
 
         }
     else if (option == 4) {
-            String numbers = main.EnterArguments();
-            List<Integer> intList2 = Arrays.stream(numbers.split(","))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-            main.runCalculator(intList2);
+            main.EnterArguments();
 
     }else if (option == 5) {
-            System.exit(0);
+            System.out.println(" _   _                 _                      \n" +
+                    "| | | |               | |                     \n" +
+                    "| |_| |__   __ _ _ __ | | ___   _  ___  _   _ \n" +
+                    "| __| '_ \\ / _` | '_ \\| |/ / | | |/ _ \\| | | |\n" +
+                    "| |_| | | | (_| | | | |   <| |_| | (_) | |_| |\n" +
+                    " \\__|_| |_|\\__,_|_| |_|_|\\_\\\\__, |\\___/ \\__,_|\n" +
+                    "                             __/ |            \n" +
+                    "                            |___/");
+            System.exit(0); // Stops the execution of the code with no error messages
         }
 
     }
