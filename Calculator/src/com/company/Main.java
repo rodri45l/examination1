@@ -2,7 +2,9 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 @FunctionalInterface
 interface CalculateInterface {
@@ -14,8 +16,10 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         String numbers = main.EnterArguments();
-        ArrayList<String> numberList = new ArrayList<>(Arrays.asList(numbers.split(",")));
-        ArrayList<Integer> intList = main.arrayListToInt(numberList);
+        List<Integer> intList = Arrays.stream(numbers.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
         int option = main.ShowMenu();
 
         if (option == 1) {
@@ -71,13 +75,6 @@ public class Main {
 
     }
 
-    public ArrayList<Integer> arrayListToInt(ArrayList<String> rawNumbers) {
-        ArrayList<Integer> ints = new ArrayList<>();
-        rawNumbers.forEach(strNumb -> ints.add(Integer.parseInt(strNumb)));
-        return ints;
-
-
-    }
 
 
 }
