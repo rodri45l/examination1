@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @FunctionalInterface
 interface CalculateInterface {
@@ -107,7 +108,8 @@ public class Main {
     else if (option == 4) {
             main.EnterArguments();
 
-    }else if (option == 5) {
+    }
+    else if (option == 5) {
             System.out.println(" _   _                 _                      \n" +
                     "| | | |               | |                     \n" +
                     "| |_| |__   __ _ _ __ | | ___   _  ___  _   _ \n" +
@@ -118,7 +120,6 @@ public class Main {
                     "                            |___/");
             System.exit(0); // Stops the execution of the code with no error messages
         }
-
     }
 }
 
