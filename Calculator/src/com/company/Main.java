@@ -42,7 +42,10 @@ public class Main {
             i = main.ShowMenu(); // We use recursion to show again the menu if an invalid option is chosen.
         }
         return i;
+    }
 
+    public void PrintResult(Object result){
+        System.out.println("Operation result: " + result + "\nDone!");
     }
 
     public void EnterArguments() {
@@ -70,16 +73,14 @@ public class Main {
                 Integer result = intList.stream()
                         .mapToInt(Integer::intValue)
                         .sum();
-                System.out.println(result);
-                System.out.println("Done!");
+                main.PrintResult(result);
             };
             sum.Calculate();
             main.runCalculator(intList);
         } else if (option == 2) {
             CalculateInterface multiplication = () -> {
                 int result = intList.stream().reduce(1, (a, b) -> a * b);
-                System.out.println(result);
-                System.out.println("Done!");
+                main.PrintResult(result);
             };
             multiplication.Calculate();
             main.runCalculator(intList);
@@ -87,9 +88,9 @@ public class Main {
         } else if (option == 3) {
             CalculateInterface subtraction = () -> {
                 int result = intList.stream().reduce(0, (a, b) -> a - b);
-                System.out.println(result);
-                System.out.println("Done!");
+                main.PrintResult(result);
             };
+
             subtraction.Calculate();
             main.runCalculator(intList);
         } else if (option == 4) {
@@ -99,8 +100,7 @@ public class Main {
                         .mapToInt(number -> number.intValue())
                         .average();
 
-                System.out.println(result.getAsDouble());
-                System.out.println("Done!");
+                main.PrintResult(result.getAsDouble());
             };
 
             averageInt.Calculate();
