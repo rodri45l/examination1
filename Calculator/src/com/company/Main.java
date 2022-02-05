@@ -70,16 +70,14 @@ public class Main {
                 Integer result = intList.stream()
                         .mapToInt(Integer::intValue)
                         .sum();
-                System.out.println(result);
-                System.out.println("Done!");
-            };
+                System.out.println("The result is: " + result + "\nDone!");
+                };
             sum.Calculate();
             main.runCalculator(intList);
         } else if (option == 2) {
             CalculateInterface multiplication = () -> {
                 int result = intList.stream().reduce(1, (a, b) -> a * b);
-                System.out.println(result);
-                System.out.println("Done!");
+                System.out.println("The result is: " + result + "\nDone!");
             };
             multiplication.Calculate();
             main.runCalculator(intList);
@@ -87,8 +85,7 @@ public class Main {
         } else if (option == 3) {
             CalculateInterface subtraction = () -> {
                 int result = intList.stream().reduce(0, (a, b) -> a - b);
-                System.out.println(result);
-                System.out.println("Done!");
+                System.out.println("The result is: " + result + "\nDone!");
             };
             subtraction.Calculate();
             main.runCalculator(intList);
@@ -99,8 +96,7 @@ public class Main {
                         .mapToInt(number -> number.intValue())
                         .average();
 
-                System.out.println(result.getAsDouble());
-                System.out.println("Done!");
+                System.out.println("The result is: " + result.getAsDouble() + "\nDone!");
             };
 
             averageInt.Calculate();
