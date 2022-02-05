@@ -1,10 +1,8 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @FunctionalInterface
 interface CalculateInterface {
@@ -23,10 +21,7 @@ public class Main {
 
         System.out.println("\n\nWelcome to our calculator!");
         Main main = new Main();
-            main.EnterArguments();
-
-
-
+        main.EnterArguments();
     }
 
     public int ShowMenu() {
@@ -35,12 +30,13 @@ public class Main {
         System.out.println("Please choose one of the options showed below:");
         System.out.println("1. Add");
         System.out.println("2. Multiply");
-        System.out.println("3. Substract");
-        System.out.println("4. Change numbers");
-        System.out.println("5. Exit");
+        System.out.println("3. Subtract");
+        System.out.println("4. Average");
+        System.out.println("5. Change numbers");
+        System.out.println("6. Exit");
         int i;
         i = scanner.nextInt();
-        if (i < 1 | i > 5) {
+        if (i < 1 | i > 6) {
             System.out.println("Option Out of bounds!!");
             System.out.println("Try Again!");
             i = main.ShowMenu(); // We use recursion to show again the menu if an invalid option is chosen.
@@ -50,26 +46,23 @@ public class Main {
     }
 
     public void EnterArguments() {
-        try{
+        try {
             Main main = new Main();
-        System.out.print("Please enter the numbers you need for the operation separated by a comma: ");
-        Scanner scanner = new Scanner(System.in);
-        String numbers = scanner.nextLine();
-        List<Integer> intList = Arrays.stream(numbers.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-        main.runCalculator(intList);}
-        catch(NumberFormatException e){
+            System.out.print("Please enter the numbers you need for the operation separated by a comma: ");
+            Scanner scanner = new Scanner(System.in);
+            String numbers = scanner.nextLine();
+            List<Integer> intList = Arrays.stream(numbers.split(","))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+            main.runCalculator(intList);
+        } catch (NumberFormatException e) {
             System.out.println("Only numbers and commas allowed");
             EnterArguments();
         }
-
     }
 
     public void runCalculator(List<Integer> intList) {
         Main main = new Main();
-
-
         int option = main.ShowMenu();
 
         if (option == 1) {
@@ -84,30 +77,38 @@ public class Main {
             main.runCalculator(intList);
         } else if (option == 2) {
             CalculateInterface multiplication = () -> {
-                int x;
-                x = intList.stream().reduce(1, (a, b) -> a * b);
-                System.out.println(x);
+                int result = intList.stream().reduce(1, (a, b) -> a * b);
+                System.out.println(result);
                 System.out.println("Done!");
             };
             multiplication.Calculate();
             main.runCalculator(intList);
 
-
         } else if (option == 3) {
             CalculateInterface subtraction = () -> {
-                int x;
-                x = intList.stream().reduce(0, (a, b) -> a - b);
-                System.out.println(x);
+                int result = intList.stream().reduce(0, (a, b) -> a - b);
+                System.out.println(result);
                 System.out.println("Done!");
             };
             subtraction.Calculate();
             main.runCalculator(intList);
+        } else if (option == 4) {
+            CalculateInterface averageInt = () -> {
+                OptionalDouble result = intList
+                        .stream()
+                        .mapToInt(number -> number.intValue())
+                        .average();
 
-        }
-    else if (option == 4) {
+                System.out.println(result.getAsDouble());
+                System.out.println("Done!");
+            };
+
+            averageInt.Calculate();
+            main.runCalculator(intList);
+
+        } else if (option == 5) {
             main.EnterArguments();
-
-    }else if (option == 5) {
+        } else if (option == 6) {
             System.out.println(" _   _                 _                      \n" +
                     "| | | |               | |                     \n" +
                     "| |_| |__   __ _ _ __ | | ___   _  ___  _   _ \n" +
@@ -118,7 +119,6 @@ public class Main {
                     "                            |___/");
             System.exit(0); // Stops the execution of the code with no error messages
         }
-
     }
 }
 
