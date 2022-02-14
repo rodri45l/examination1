@@ -2,7 +2,6 @@ package com.company;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @FunctionalInterface
 interface CalculateInterface {
@@ -113,7 +112,6 @@ public class Main {
                     " \\__|_| |_|\\__,_|_| |_|_|\\_\\\\__, |\\___/ \\__,_|\n" +
                     "                             __/ |            \n" +
                     "                            |___/");
-            System.exit(0); // Stops the execution of the code with no error messages
         }
     }
 }
